@@ -1,0 +1,7 @@
+/home/pinodexmr/p2pool/build/p2pool.log {
+weekly
+missingok
+nocompress
+copytruncate
+size 25M
+}

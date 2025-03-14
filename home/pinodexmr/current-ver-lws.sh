@@ -1,0 +1,2 @@
+#!/bin/bash
+CURRENT_VERSION_LWS=20231216

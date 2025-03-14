@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P2Pool Dashboard</title>
+    <link rel="shortcut icon" type="image/ico" href="/assets/images/XMR.ico" />
+    <link rel="stylesheet" href="assets/css/style_p2pool_status.css" />
+    <script defer src="assets/js/scripts_p2pool_status.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header></header>
+
+      <main>
+        <!-- Pool Statistics -->
+        <div class="card">
+          <h2>P2Pool Statistics --mini</h2>
+          <div class="pool-hashrate">
+            <p>Hash Rate: <span id="pool_hashrate">Loading...</span></p>
+            <p>Miners: <span id="pool_miners">Loading...</span></p>
+            <p>Total Hashes: <span id="pool_total_hashes">Loading...</span></p>
+          </div>
+          <p>Time Since Last Block Found: <span id="pool_time_since_last_block">Calculating...</span></p>
+          <p>Current Effort: <span id="pool_current_effort">Calculating...</span></p>
+          <div class="last-block">
+            <p>Total Blocks Found: <span id="pool_total_blocks_found">Loading...</span></p>
+            <p>Last Block Found: <span id="pool_last_block_found">Loading...</span></p>
+            <p>Date: <span id="pool_last_block_time">Loading...</span></p>
+          </div>
+          <div class="pplns-window">
+            <p>PPLNS Window Size: <span id="pool_pplns_window_size">Loading...</span></p>
+            <p>PPLNS Weight: <span id="pool_pplns_weight">Loading...</span></p>
+          </div>
+          <div class="sidechain-height">
+            <p>Sidechain Height: <span id="pool_sidechain_height">Loading...</span></p>
+            <p>Sidechain Difficulty: <span id="pool_sidechain_difficulty">Loading...</span></p>
+          </div>
+        </div>
+
+        <!-- Stratum Statistics -->
+        <div class="card">
+          <h2>Worker Statistics</h2>
+          <div class="workers-hashrate">
+            <p>Hashrate (15m): <span id="stratum_hashrate_15m">Loading...</span></p>
+            <p>Hashrate (1h): <span id="stratum_hashrate_1h">Loading...</span></p>
+            <p>Hashrate (24h): <span id="stratum_hashrate_24h">Loading...</span></p>
+          </div>
+          <div class="shares-row">
+            <p>Shares Found: <span id="stratum_shares_found">Loading...</span></p>
+            <p>Shares Failed: <span id="stratum_shares_failed">Loading...</span></p>
+            <p>Total Hashes: <span id="stratum_total_hashes">Loading...</span></p>
+          </div>
+          <div class="effort-row">
+            <p>Current Effort: <span id="stratum_current_effort">Loading...</span></p>
+            <p>Average Effort: <span id="stratum_average_effort">Loading...</span></p>
+          </div>
+          <div class="pay-window">
+            <p>Block Reward Share Percent: <span id="stratum_block_reward_share_percent">Loading...</span></p>
+            <p>Shares in Payment Window: <span id="shares_in_window">Calculating...</span></p>
+          </div>
+          <div class="connections-row">
+            <p>Connections: <span id="stratum_connections">Loading...</span></p>
+            <p>Incoming Connections: <span id="stratum_incoming_connections">Loading...</span></p>
+          </div>
+          <button class="toggle-button" onclick="toggleWorkers()">Show Workers</button>
+          <table id="stratum_workers_table" class="hidden">
+            <thead>
+              <tr>
+                <th>ADDRESS</th>
+                <th>UPTIME</th>
+                <th>DIFFICULTY</th>
+                <th>HASHRATE</th>
+                <th>IDENTIFIER</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Worker rows will be dynamically added here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Network Statistics -->
+        <div class="card">
+          <h2>Network Statistics</h2>
+          <div class="network-hashrate">
+            <p>Network Hashrate: <span id="network_hashrate">Loading...</span></p>
+            <p>Difficulty: <span id="network_difficulty">Loading...</span></p>
+          </div>
+          <div class="block-height">
+            <p>Block Height: <span id="network_block_height">Loading...</span></p>
+            <p>Timestamp: <span id="network_timestamp">Loading...</span></p>
+          </div>
+          <p>Block Hash: <span id="network_block_hash">Loading...</span></p>
+          <p>Block Reward: <span id="network_block_reward">Loading...</span></p>
+        </div>
+
+        <!-- P2P Statistics -->
+        <div class="card">
+          <h2>P2P Statistics</h2>
+          <p>Connections: <span id="p2p_connections">Loading...</span></p>
+          <p>Incoming Connections: <span id="p2p_incoming_connections">Loading...</span></p>
+          <p>Peer List Size: <span id="p2p_peer_list_size">Loading...</span></p>
+          <button class="toggle-button" onclick="togglePeers()">Show Peers</button>
+          <table id="p2p_peers_table" class="hidden">
+            <thead>
+              <tr>
+                <th>DIRECTION</th>
+                <th>UPTIME</th>
+                <th>LATENCY</th>
+                <th>VERSION</th>
+                <th>HEIGHT</th>
+                <th>ADDRESS</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Miner Statistics -->
+        <div class="card">
+          <h2>Built-in Pool Miner Statistics</h2>
+          <p>Current Hashrate: <span id="miner_current_hashrate">Loading...</span></p>
+          <p>Total Hashes: <span id="miner_total_hashes">Loading...</span></p>
+          <p>Uptime: <span id="miner_uptime">Loading...</span></p>
+          <p>Shares Found: <span id="miner_shares_found">Loading...</span></p>
+          <p>Shares Failed: <span id="miner_shares_failed">Loading...</span></p>
+          <p>Block Reward Share Percent: <span id="miner_block_reward_share_percent">Loading...</span></p>
+          <p>Threads: <span id="miner_threads">Loading...</span></p>
+        </div>
+
+        <!-- Recent Blocks -->
+        <div class="card">
+          <h2>Recent Blocks Found --mini</h2>
+          <button class="toggle-button" onclick="toggleBlocks()">Show More Blocks</button>
+          <table id="blocks_table" style="width: 100%; text-align: left">
+            <thead>
+              <tr>
+                <th>Height</th>
+                <th>Effort</th>
+                <th>Age</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="3">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+      <footer>
+        <p>Help and Support + Lottery | <a href="https://p2pool.io/mini/#pool">https://p2pool.io/mini/#pool</a> | <a href="https://mini.p2pool.observer">https://mini.p2pool.observer</a> | <a href="https://xmrvsbeast.com/p2pool">https://xmrvsbeast.com/p2pool</a></p>
+        <p>This P2Pool status page created by <a href="https://github.com/OIEIEIO">https://github.com/OIEIEIO</a> and adapted for use with PiNodeXMR</p>
+      </footer>
+    </div>
+  </body>
+</html>

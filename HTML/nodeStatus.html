@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Title  -->
+    <title>PiNode-XMR - Status</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <!-- Load Ajax -->
+    <script src="assets/js/jquery.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/XMR.ico" />
+    <!-- Font Awesome cdn -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/app.css" />
+</head>
+
+<body>
+    <div id="NavContent"></div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-4">
+                <h3><i class="fas fa-group-arrows-rotate"></i>Sync <small>Status</small></h3>
+                <pre class="node_status imported-text"></pre>
+
+                <script>
+                    $.get("Node_Status.txt", function (data) {
+                        $(".node_status").html(data);
+                    });
+                </script>
+            </div> <!-- /.col -->
+            <div class="col-12 col-lg-8">
+                <h3><i class="fas fa-computer"></i>System <small>Monitor</small></h3>
+                <pre class="iamrunning imported-text"></pre>
+
+                <script>
+                    $.get("iamrunning_version.txt", function (data) {
+                        $(".iamrunning").html(data);
+                    });
+                </script>
+            </div><!-- /.col -->
+        </div><!-- /row -->
+    </div><!-- container -->
+
+    <!-- Start Accordian -->
+    <div class="container-fluid py-5">
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fas fa-arrows-alt-v"></i>Hardware Status
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <h1><i class="fas fa-microchip"></i>Hardware Status:</h1>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3><i class="fas fa-hard-drive"></i>Storage: <small>Usage</small></h3>
+                                    <pre class="df-h imported-text"></pre>
+
+                                    <script>
+                                        $.get("df-h.txt", function (data) {
+                                            $(".df-h").html(data);
+                                        });
+                                    </script>
+                                </div><!-- /.col -->
+                                <div class="col-md-6">
+                                    <h3><i class="fas fa-temperature-half"></i>Temperature: <small>CPU</small></h3>
+                                    <pre class="temp imported-text"></pre>
+
+                                    <script>
+                                        $.get("temp.txt", function (data) {
+                                            $(".temp").html(data);
+                                        });
+                                    </script>
+                                </div><!-- /.col -->
+                            </div><!-- /row -->
+                        </div><!-- container-fluid -->
+
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3><i class="fas fa-memory"></i>Memory: <small>RAM/swap-file* Usage</small></h3>
+                                    <pre class="free-h imported-text"></pre>
+
+                                    <script>
+                                        $.get("free-h.txt", function (data) {
+                                            $(".free-h").html(data);
+                                        });
+                                    </script>
+                                </div><!-- col -->
+                            </div><!-- row -->
+                        </div><!-- container-fluid -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"  data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="fas fa-arrows-alt-v"></i>Transaction Pool Status
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h1><i class="fa-brands fa-monero"></i>Monero Network:</h1>
+
+                                    <h3>MemPool <small>Overview</small></h3>
+                                    <pre class="txpoolstatus imported-text"></pre>
+
+                                    <script>
+                                        $.get("TXPool_Status.txt", function (data) {
+                                            $(".txpoolstatus").html(data);
+                                        });
+                                    </script>
+                                </div><!-- col -->
+                            </div><!-- row -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3><i class="fas fa-spinner"></i>Transactions Pending <small>Live</small></h3>
+                                    <pre class="txpoolshort imported-text"></pre>
+
+                                    <script>
+                                        $.get("TXPool-short_Status.txt", function (data) {
+                                            $(".txpoolshort").html(data);
+                                        });
+                                    </script>
+                                </div><!-- col -->
+                            </div><!-- row -->
+                        </div><!-- container-fluid -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="fas fa-arrows-alt-v"></i>Connection Status
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1><i class="fa-brands fa-monero"></i>Monero Network:</h1>
+                                    <h3>Network Peers: <small>Live Connected</small></h3>
+                                    <p>Currently connected Monero peers to this device with connection initiative (incoming/outgoing) and other stats.</p>
+                                    <pre class="printcn imported-text"></pre>
+
+                                    <script>
+                                        $.get("print_cn.txt", function (data) {
+                                            $(".printcn").html(data);
+                                        });
+                                    </script>
+
+                                    <h3>Network Peers <small>Full</small></h3>
+                                    <pre class="printpl imported-text"></pre>
+
+                                    <script>
+                                        $.get("print_pl.txt", function (data) {
+                                            $(".printpl").html(data);
+                                        });
+                                    </script>
+                                </div><!-- col -->
+                            </div><!-- row -->
+                        </div><!-- container-fluid -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- container-fluid -->
+
+    <!-- JavaScript -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script> 
+        $(function(){
+            $("#NavContent").load("navbar.html"); 
+        });
+    </script>
+</body>
+
+</html>
